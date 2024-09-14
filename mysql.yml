@@ -2,25 +2,23 @@
   hosts: all
   become: yes
   tasks:
-    - name: mysql repo copying
+    - name: Disable MySQL MOdule Default Version
+      ansible.builtin.shell: dnf module disable mysql -y
+
+    - name: COpy MySQL Repo file
       ansible.builtin.copy:
         src: mysql.repo
         dest: /etc/yum.repos.d/mysql.repo
 
-    - name: disable default mysql version
-      ansible.builtin.shell: dnf module disable mysql -y
-
-    - name: install mysql server
-      ansible.builtin.yum:
+    - name: INstall MySQL Server
+      ansible.builtin.dnf:
         name: mysql-community-server
         state: installed
 
-    - name: start mysql service
-      ansible.builtin.systemd:
+    - name: Start MySQL Service
+      ansible.builtin.systemd_service:
         name: mysqld
         state: restarted
-        enabled: yes
 
-    - name: set root password
-      ansible.builtin.shell: mysql -uroot -pRoboShop@1
-
+    - name: Set MySQL Root Password
+      ansible.builtin.shell: mysql_secure_installation --set-root-pass RoboShop@1
