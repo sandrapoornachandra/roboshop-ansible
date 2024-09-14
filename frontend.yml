@@ -28,6 +28,7 @@
         dest: /usr/share/nginx/html
         remote_src: yes
 
+
     - name: Reatart nginx
       ansible.builtin.systemd:
         name: nginx
