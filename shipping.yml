@@ -1,9 +1,9 @@
 - name: shipping
   hosts: all
-  become: true
+  become: yes
   vars:
     component: shipping
     schema: true
   tasks:
-    - name: nodejs setup
+    - name: import nodejs
       ansible.builtin.import_tasks: java.yml

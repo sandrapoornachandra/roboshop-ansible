@@ -1,9 +1,11 @@
-- name: catalogue
+- name: cart
   hosts: all
   become: yes
   vars:
-    component: catalogue
-#    schema: true
+    component: cart
   tasks:
     - name: import nodejs
       ansible.builtin.import_tasks: nodejs.yml
+
+
+
