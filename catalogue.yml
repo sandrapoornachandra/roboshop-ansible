@@ -1,22 +1,9 @@
-- name: catalogue setup
+- name: catalogue
   hosts: all
   become: yes
   vars:
     component: catalogue
-#    schema: true
+    schema: true
   tasks:
-
-
-    - name: Nodejs Setup
-      ansible.builtin.import_tasks: nodejs.yaml
-
-    - name: install mongodb
-      ansible.builtin.dnf:
-        name: mongodb-org
-        state: installed
-
-    - name: Restart catalogue
-      ansible.builtin.systemd:
-        name: mongod
-        state: restarted
-        enabled: yes
+    - name: import nodejs
+      ansible.builtin.import_tasks: nodejs.yml
