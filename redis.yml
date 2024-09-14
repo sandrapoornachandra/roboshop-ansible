@@ -1,0 +1,27 @@
+- name: redis setup
+  hosts: all
+  become: yes
+  tasks:
+    - name: Install Redis Repo
+      ansible.builtin.dnf:
+        name: https://rpms.remirepo.net/enterprise/remi-release-8.rpm -y
+        State: installed
+
+    - name: Enable Redis Module
+      ansible.builtin.shell: dnf enable redis:remi-6.2
+
+    - name: Install Redis
+      ansible.builtin.dnf:
+        name: redis
+        State: installed
+
+    - name: update listen address in Redis configuration /etc/redis.conf
+      ansible.builtin.replace:
+        path: /etc/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
+    - name: update listen address in Redis configuration /etc/redis/redis.conf
+      ansible.builtin.replace:
+        path: /etc/dis/redis.conf
+        regexp: '127.0.0.1'
+        replace: '0.0.0.0'
