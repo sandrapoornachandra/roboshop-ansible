@@ -1,8 +1,8 @@
-- name: catalogue
+- name: user
   hosts: all
   become: yes
   vars:
-    component: catalogue
+    component: user
 #    schema: true
   tasks:
     - name: import nodejs
