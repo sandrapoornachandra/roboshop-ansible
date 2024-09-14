@@ -8,10 +8,10 @@
         dest: /etc/yum.repos.d/mysql.repo
 
     - name: disable default mysql version
-      ansible.builtin.shell: dnf module disable mysql -y
+      ansible.builtin.shell: yum module disable mysql -y
 
     - name: install mysql server
-      ansible.builtin.dnf:
+      ansible.builtin.yum:
         name: mysql-community-server
         state: installed
 
