@@ -22,7 +22,7 @@
 
 - name: schema setup
   ansible.builtin.import_tasks: mongo-schema.yml
-  when: schema is defined
+#  when: schema is defined
 
 
 - name: setup {{component}}
