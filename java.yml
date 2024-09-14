@@ -1,0 +1,30 @@
+- name: disable nodejs
+  ansible.builtin.shell: dnf module disable nodejs -y
+
+- name: enablenodejs
+  ansible.builtin.shell: dnf module enable nodejs:18 -y
+
+
+- name: Install maven
+  ansible.builtin.yum:
+    name: maven
+    state: installed
+
+- name: app preq
+  ansible.builtin.import_tasks: app-preq.yml
+
+
+
+- name: download maven dependencies
+  ansible.builtin.shell: mvn clean package ; mv target/{{component}}-1.0.jar {{component}}.jar
+  args:
+    chdir: /app
+
+- name: schema setup
+  ansible.builtin.import_tasks: mysql.yml
+  when: schema is defined
+
+
+- name: setup {{component}}
+  ansible.builtin.import_tasks: systemd.yml
+
