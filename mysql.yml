@@ -1,8 +1,8 @@
-- name: mongodb
+- name: mysql
   hosts: all
   become: true
   tasks:
-    - name: copy mongodb
+    - name: mysql repo copying
       ansible.builtin.copy:
         src: mysql.repo
         dest: /etc/yum.repos.d/mysql.repo
