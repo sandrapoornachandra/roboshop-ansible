@@ -1,8 +1,0 @@
-- name: payment
-  hosts: all
-  become: true
-  vars:
-
-  tasks:
-    - name: import python
-      ansible.builtin.import_tasks: python.yml

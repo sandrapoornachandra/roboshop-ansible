@@ -1,5 +1,0 @@
-- name: rabbitmq
-  hosts: all
-  become: true
-  tasks:
-
